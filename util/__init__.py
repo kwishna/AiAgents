@@ -7,3 +7,7 @@ load_dotenv()
 
 def get_openai_api_key():
     return os.environ['OPENAI_API_KEY']
+
+
+def get_openai_model_name():
+    return os.environ['OPENAI_MODEL_NAME']
