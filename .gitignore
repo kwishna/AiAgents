@@ -1,1 +1,11 @@
 read/
+.env
+.ipynb_checkpoints
+bin
+etc
+include
+lib
+lib64
+share
+*.pyc
+rough.py
