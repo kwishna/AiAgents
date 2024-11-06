@@ -14,6 +14,10 @@ from langchain_core.messages import ToolMessage
 from langchain_core.runnables import RunnableLambda
 from langgraph.prebuilt import ToolNode
 
+import dotenv
+
+dotenv.load_dotenv()
+
 
 @tool
 def compute_savings(monthly_cost: float) -> float:
