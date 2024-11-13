@@ -1,4 +1,5 @@
 read/
+.idea
 .env
 .ipynb_checkpoints
 bin
