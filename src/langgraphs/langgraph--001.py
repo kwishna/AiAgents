@@ -34,31 +34,31 @@ def compute_savings(monthly_cost: float) -> float:
             - 'net_savings_10_years': The net savings over 10 years after installation costs.
     """
 
-    def calculate_solar_savings(monthly_cost) -> {
+    def calculate_solar_savings(month_cost) -> {
             "number_of_panels": int,
             "installation_cost": float,
             "net_savings_10_years": float
         }:
         # Assumptions for the calculation
-        cost_per_kWh = 0.28
+        cost_per_kwh = 0.28
         cost_per_watt = 1.50
         sunlight_hours_per_day = 3.5
         panel_wattage = 350
         system_lifetime_years = 10
 
         # Monthly electricity consumption in kWh
-        monthly_consumption_kWh = monthly_cost / cost_per_kWh
+        monthly_consumption_kwh = month_cost / cost_per_kwh
 
         # Required system size in kW
-        daily_energy_production = monthly_consumption_kWh / 30
-        system_size_kW = daily_energy_production / sunlight_hours_per_day
+        daily_energy_production = monthly_consumption_kwh / 30
+        system_size_kw = daily_energy_production / sunlight_hours_per_day
 
         # Number of panels and installation cost
-        number_of_panels = system_size_kW * 1000 / panel_wattage
-        installation_cost = system_size_kW * 1000 * cost_per_watt
+        number_of_panels = system_size_kw * 1000 / panel_wattage
+        installation_cost = system_size_kw * 1000 * cost_per_watt
 
         # Annual and net savings
-        annual_savings = monthly_cost * 12
+        annual_savings = month_cost * 12
         total_savings_10_years = annual_savings * system_lifetime_years
         net_savings = total_savings_10_years - installation_cost
 
@@ -151,7 +151,11 @@ def get_bedrock_client(region):
     return boto3.client("bedrock-runtime", region_name=region)
 
 def create_bedrock_llm(client):
-    return ChatBedrock(model_id='anthropic.claude-3-sonnet-20240229-v1:0', client=client, model_kwargs={'temperature': 0}, region_name='us-east-1')
+    return ChatBedrock(
+        model_id='anthropic.claude-3-sonnet-20240229-v1:0',
+        client=client,
+        model_kwargs={'temperature': 0}, region_name='us-east-1'
+    )
 
 llm = create_bedrock_llm(get_bedrock_client(region='us-east-1'))
 
