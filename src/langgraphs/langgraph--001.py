@@ -4,7 +4,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import Runnable, RunnableWithFallbacks
 from langchain_aws import ChatBedrock
 import boto3
-from typing import Annotated
+from typing import Annotated, Dict, Any
 
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import StateGraph
@@ -20,7 +20,7 @@ dotenv.load_dotenv()
 
 
 @tool
-def compute_savings(monthly_cost: float) -> float:
+def compute_savings(monthly_cost: float) -> dict[str, Any]:
     """
     Tool to compute the potential savings when switching to solar energy based on the user's monthly electricity cost.
 
@@ -34,11 +34,7 @@ def compute_savings(monthly_cost: float) -> float:
             - 'net_savings_10_years': The net savings over 10 years after installation costs.
     """
 
-    def calculate_solar_savings(month_cost) -> {
-            "number_of_panels": int,
-            "installation_cost": float,
-            "net_savings_10_years": float
-        }:
+    def calculate_solar_savings(month_cost):
         # Assumptions for the calculation
         cost_per_kwh = 0.28
         cost_per_watt = 1.50
