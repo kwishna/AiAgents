@@ -205,3 +205,194 @@ except ollama.ResponseError as e:
   if e.status_code == 404:
     ollama.pull(model)
 ```
+
+## cURL
+
+### Prompt
+```bash
+curl http://localhost:11434/api/generate -d '{
+  "model": "deepseek-r1:7b",
+  "prompt": "Write a short poem about the stars."
+}'
+```
+
+### Chat Completion
+```bash
+curl http://localhost:11434/api/chat -d '{
+  "model": "deepseek-r1:7b",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Write a short poem about the stars."
+    }
+  ]
+}'
+```
+
+### Supported Endpoints and Features
+#### Here's a breakdown of the supported endpoints and their features:
+```
+/v1/chat/completions
+
+- Purpose: Generate chat-style responses.
+- Supported Features:
+    Chat completions (multi-turn conversations).
+    Streaming responses (real-time output).
+    JSON mode (structured JSON output).
+    Reproducible outputs (using a seed).
+    Vision (multimodal models like llava that can process images).
+    Tools (function calling).
+
+- Supported Request Fields:
+    model: The name of the Ollama model to use.
+    messages: An array of message objects, each with a role (system user, assistant, or tool) and content (text or image).
+    frequency_penalty, presence_penalty: Controls repetition.
+    response_format: Specifies the output format (e.g. json).
+    seed: For reproducible outputs.
+    stop: Sequences to stop generation.
+    stream: Enables/disables streaming.
+    stream_options: Additional options for streaming.
+    include_usage: Includes usage information in the stream.
+    temperature: Controls randomness.
+    top_p: Controls diversity.
+    max_tokens: Maximum tokens to generate.
+    tools: List of tools the model can access.
+```
+
+```
+/v1/completions
+
+- Purpose: Generate text completions.
+- Supported Features:
+    Text completions (single-turn generation).
+    Streaming responses.
+    JSON mode
+    Reproducible outputs.
+
+- Supported Request Fields:
+    model: The name of the Ollama model.
+    prompt: The input text.
+    frequency_penalty, presence_penalty: Controls repetition.
+    seed: For reproducible outputs.
+    stop: Stop sequences.
+    stream: Enables/disables streaming.
+    stream_options: Additional options for streaming.
+    include_usage: Includes usage information in the stream.
+    temperature: Controls randomness.
+    top_p: Controls diversity.
+    max_tokens: Maximum tokens to generate.
+    suffix: Text to append after the model's response
+```
+
+```
+/v1/models
+```
+
+```
+/v1/models/{model}
+```
+
+```
+/v1/embeddings
+```
+
+## How to Use Ollama with OpenAI Clients
+OpenAI Python Library:
+```python
+from openai import OpenAI
+
+client = OpenAI(
+    base_url='http://localhost:11434/v1/',
+    api_key='ollama',  # Required but ignored
+)
+
+# Example chat completion
+chat_completion = client.chat.completions.create(
+    messages=[
+        {'role': 'user', 'content': 'Say this is a test'},
+    ],
+    model='deepseek-r1:7b',
+)
+
+# Example text completion
+completion = client.completions.create(
+    model="deepseek-r1:7b",
+    prompt="Say this is a test",
+)
+
+# Example list models
+list_completion = client.models.list()
+
+# Example get model info
+model = client.models.retrieve("deepseek-r1:7b")
+```
+
+## OpenAI JavaScript Library:
+```javascript
+import OpenAI from 'openai';
+
+const openai = new OpenAI({
+  baseURL: 'http://localhost:11434/v1/',
+  apiKey: 'ollama', // Required but ignored
+});
+
+// Example chat completion
+const chatCompletion = await openai.chat.completions.create({
+  messages: [{ role: 'user', content: 'Say this is a test' }],
+  model: 'deepseek-r1:7b',
+});
+
+// Example text completion
+const completion = await openai.completions.create({
+  model: "deepseek-r1:7b",
+  prompt: "Say this is a test.",
+});
+
+// Example list models
+const listCompletion = await openai.models.list()
+
+// Example get model info
+const model = await openai.models.retrieve("deepseek-r1:7b")
+```
+
+## curl (Direct API Calls):
+Chat completion
+```bash
+curl http://localhost:11434/v1/chat/completions \
+    -H "Content-Type: application/json" \
+    -d '{
+        "model": "deepseek-r1:7b",
+        "messages": [
+            {
+                "role": "user",
+                "content": "Hello!"
+            }
+        ]
+    }'
+```
+```bash
+# Text completion
+curl http://localhost:11434/v1/completions \
+    -H "Content-Type: application/json" \
+    -d '{
+        "model": "deepseek-r1:7b",
+        "prompt": "Say this is a test"
+    }'
+```
+```bash
+# List models
+curl http://localhost:11434/v1/models
+```
+```bash
+# Get model info
+curl http://localhost:11434/v1/models/deepseek-r1:7b
+```
+```bash
+# Embeddings
+curl http://localhost:11434/v1/embeddings \
+    -H "Content-Type: application/json" \
+    -d '{
+        "model": "all-minilm",
+        "input": ["why is the sky blue?", "why is the grass green?"]
+    }'
+```
