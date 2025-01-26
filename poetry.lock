@@ -2929,18 +2929,18 @@ tenacity = ">=8.1.0,<8.4.0 || >8.4.0,<10"
 
 [[package]]
 name = "langchain-core"
-version = "0.3.28"
+version = "0.3.33"
 description = "Building applications with LLMs through composability"
 optional = false
 python-versions = "<4.0,>=3.9"
 files = [
-    {file = "langchain_core-0.3.28-py3-none-any.whl", hash = "sha256:a02f81ca53a8eed757133797e5a602ca80c1324bbecb0c5d86ef7bd3d6625372"},
-    {file = "langchain_core-0.3.28.tar.gz", hash = "sha256:407f7607e6b3c0ebfd6094da95d39b701e22e59966698ef126799782953e7f2c"},
+    {file = "langchain_core-0.3.33-py3-none-any.whl", hash = "sha256:269706408a2223f863ff1f9616f31903a5712403199d828b50aadbc4c28b553a"},
+    {file = "langchain_core-0.3.33.tar.gz", hash = "sha256:b5dd93a4e7f8198d2fc6048723b0bfecf7aaf128b0d268cbac19c34c1579b953"},
 ]
 
 [package.dependencies]
 jsonpatch = ">=1.33,<2.0"
-langsmith = ">=0.1.125,<0.3"
+langsmith = ">=0.1.125,<0.4"
 packaging = ">=23.2,<25"
 pydantic = [
     {version = ">=2.5.2,<3.0.0", markers = "python_full_version < \"3.12.4\""},
@@ -4075,6 +4075,21 @@ files = [
 rsa = ["cryptography (>=3.0.0)"]
 signals = ["blinker (>=1.4.0)"]
 signedtoken = ["cryptography (>=3.0.0)", "pyjwt (>=2.0.0,<3)"]
+
+[[package]]
+name = "ollama"
+version = "0.4.7"
+description = "The official Python client for Ollama."
+optional = false
+python-versions = "<4.0,>=3.8"
+files = [
+    {file = "ollama-0.4.7-py3-none-any.whl", hash = "sha256:85505663cca67a83707be5fb3aeff0ea72e67846cea5985529d8eca4366564a1"},
+    {file = "ollama-0.4.7.tar.gz", hash = "sha256:891dcbe54f55397d82d289c459de0ea897e103b86a3f1fad0fdb1895922a75ff"},
+]
+
+[package.dependencies]
+httpx = ">=0.27,<0.29"
+pydantic = ">=2.9.0,<3.0.0"
 
 [[package]]
 name = "onnxruntime"
@@ -7537,4 +7552,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<=3.13"
-content-hash = "a042c2b9f494fb79d37c62c6f30c0f0ff4be68ef9916cceadf8eb4f6c1d4f326"
+content-hash = "474a5d97a5d4c12b97adb90cc50a7c505bc3fd48943870d6011a17bba613ddfc"

@@ -23,6 +23,8 @@ langchain-aws = "^0.2.10"
 smolagents = "^1.1.0"
 litellm = "^1.57.3"
 accelerate = "^1.2.1"
+langchain-core = "^0.3.33"
+ollama = "^0.4.7"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
