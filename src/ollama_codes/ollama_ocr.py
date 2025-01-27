@@ -1,5 +1,6 @@
 import base64
 import requests
+import os
 from PIL import Image
 
 SYSTEM_PROMPT = """You should act as an OCR assistant you is very intelligent at extracting text from an image. Analyze the provided image and:
@@ -37,7 +38,7 @@ def perform_ocr(image_path):
         return None
 
 if __name__ == "__main__":
-    image_path = "/Users/krishna/Documents/grocery_receipt.png"
+    image_path = os.curdir+"/receipt_image.png"
     result = perform_ocr(image_path)
     if result:
         print("OCR Recognition Result:")
