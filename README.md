@@ -58,3 +58,5 @@ I welcome contributions from the community! If you'd like to contribute to AiAge
     ```
 
 5. Open a Pull Request.
+
+![Tool Calling](tool_calling.png)
